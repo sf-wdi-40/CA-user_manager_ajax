@@ -8,6 +8,28 @@ $(document).ready(function() {
     // PUT -> Update
     // DELETE -> Destroy
 
+    function userEntryTemplate(person) {
+        return `
+            <tr>
+                <td>
+                    ${person.firstname}
+                </td>
+                <td>
+                    ${person.lastname}
+                </td>
+                <td>
+                    ${person.username}
+                </td>
+                <td>
+                    ${person.email}
+                </td>
+                <td>
+                    <a href="#" class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+        `;
+    }
+
     $.ajax({
         type: "GET",
         url: "http://myapi-profstream.herokuapp.com/api/99e553/persons"
@@ -20,25 +42,7 @@ $(document).ready(function() {
         var $tbody = $("tbody");
 
         persons.forEach(function(person) {
-            var newHtml = `
-                <tr>
-                    <td>
-                        ${person.firstname}
-                    </td>
-                    <td>
-                        ${person.lastname}
-                    </td>
-                    <td>
-                        ${person.username}
-                    </td>
-                    <td>
-                        ${person.email}
-                    </td>
-                    <td>
-                        <a href="#" class="btn btn-primary">Edit</a>
-                    </td>
-                </tr>
-            `;
+            var newHtml = userEntryTemplate(person);
 
             $tbody.append(newHtml);
         });
